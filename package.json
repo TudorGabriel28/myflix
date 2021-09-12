@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/mihaighe/myflix/issues"
   },
-  "homepage": "https://github.com/mihaighe/myflix#readme"
+  "homepage": "https://github.com/mihaighe/myflix#readme",
+  "dependencies": {
+    "prettier": "2.4.0"
+  }
 }
