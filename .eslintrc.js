@@ -1,14 +1,14 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    node: true
   },
-  extends: ['airbnb-base', 'prettier'],
+  extends: ['plugin:vue/essential', 'airbnb-base'],
   parserOptions: {
-    ecmaVersion: 12
+    ecmaVersion: 12,
+    sourceType: 'module'
   },
-  plugins: ['prettier'],
-  rules: {
-    'class-methods-use-this': false
-  }
+  plugins: ['vue'],
+  rules: {}
 };
