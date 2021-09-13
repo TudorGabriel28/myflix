@@ -7,8 +7,9 @@ module.exports = {
   extends: ['plugin:vue/essential', 'airbnb-base', 'prettier'],
   parserOptions: {
     ecmaVersion: 12,
+    parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
-  plugins: ['vue'],
+  plugins: ['vue', '@typescript-eslint'],
   rules: {}
 };
