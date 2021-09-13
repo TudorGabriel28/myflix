@@ -1,13 +1,19 @@
 import express from 'express';
+import mongooseLoader from './loaders/mongoose';
 
 require('dotenv').config();
 
-const app = express();
+async function startServer() {
+  try {
+    await mongooseLoader();
+    console.log('Mongoose connected.');
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
-});
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening at http://localhost:${process.env.PORT}`);
-});
+startServer();
