@@ -9,9 +9,7 @@ async function startServer() {
     console.log('Mongoose connected.');
 
     app.listen(process.env.PORT, () => {
-      console.log(
-        `Example app listening at http://localhost:${process.env.PORT}`
-      );
+      console.log(`Server listening at http://localhost:${process.env.PORT}`);
     });
   } catch (error) {
     console.log(error);
