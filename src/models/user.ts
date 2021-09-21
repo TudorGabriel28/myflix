@@ -9,7 +9,7 @@ if (process.env.SALT_ROUNDS) {
   throw new Error('SALT_ROUNDS is not set');
 }
 
-interface UserDocument extends Document {
+export interface UserDocument extends Document {
   email: string;
   password: string;
   firstName: string;
