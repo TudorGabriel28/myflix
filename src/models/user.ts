@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 let saltRounds: number;
@@ -9,7 +9,7 @@ if (process.env.SALT_ROUNDS) {
   throw new Error('SALT_ROUNDS is not set');
 }
 
-interface User {
+interface UserDocument extends Document {
   email: string;
   password: string;
   firstName: string;
@@ -19,7 +19,8 @@ interface User {
   role?: 'viewer' | 'admin' | 'superUser';
 }
 
-const userSchema = new Schema<User>({
+const userSchema = new Schema(
+  {
   email: {
     type: String,
     unique: true,
@@ -74,7 +75,7 @@ const userSchema = new Schema<User>({
 });
 
 userSchema.pre('save', async function hashPassword(next) {
-  const user = this;
+  const user = this as UserDocument;
 
   if (user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, saltRounds);
@@ -83,6 +84,6 @@ userSchema.pre('save', async function hashPassword(next) {
   next();
 });
 
-const UserModel = model<User>('User', userSchema);
+const UserModel = model<UserDocument>('User', userSchema);
 
 export default UserModel;
