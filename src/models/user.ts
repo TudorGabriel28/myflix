@@ -17,6 +17,8 @@ interface UserDocument extends Document {
   nickname?: string;
   active?: boolean;
   role?: 'viewer' | 'admin' | 'superUser';
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const userSchema = new Schema(
@@ -72,7 +74,9 @@ const userSchema = new Schema(
     default: 'viewer'
   }
   // friends: [{ type: Schema.Types.ObjectId, ref: 'Friends' }]
-});
+  },
+  { timestamps: true }
+);
 
 userSchema.pre('save', async function hashPassword(next) {
   const user = this as UserDocument;
