@@ -13,7 +13,8 @@ module.exports = {
   plugins: ['vue', '@typescript-eslint'],
   rules: {
     'no-console': 'off',
-    'import/extensions': ['error', 'never']
+    'import/extensions': ['error', 'never'],
+    'consistent-return': 'off'
   },
   settings: {
     'import/resolver': {
