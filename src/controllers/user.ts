@@ -1,15 +1,19 @@
-/* eslint-disable */
-
+import { omit } from 'lodash';
 import { Request, Response } from 'express';
-import UserModel, { UserDocument } from '../models/user';
+import UserService from '../services/user';
 
-export default class UserController {
-  async createUserHandler(req: Request, res: Response) {
-    try {
-      const user = await UserModel.create(req.body);
-      return res.send({ user });
-    } catch (error) {
-      console.log(error);
-    }
+const userService = new UserService();
+
+export async function createUserHandler(req: Request, res: Response) {
+  try {
+    const user = await userService.createUser(req.body);
+    return res.send(omit(user.toJSON(), 'password'));
+  } catch (error: any) {
+    console.log(error);
+    return res.status(409).send(error.message);
   }
+}
+
+export async function loginUserHandler() {
+  console.log('ad');
 }
