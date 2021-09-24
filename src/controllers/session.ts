@@ -31,7 +31,7 @@ export default async function createUserSessionHandler(
 
   // create refresh token
   const refreshToken = sign(session, {
-    expiresIn: 'refreshTokenTtl' // 1 year
+    expiresIn: process.env.REFRESH_TOKEN_TTL
   });
 
   // send refresh & access token back

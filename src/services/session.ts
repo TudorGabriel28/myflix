@@ -24,7 +24,7 @@ export function createAccessToken({
   const accessToken = sign(
     // eslint-disable-next-line no-underscore-dangle
     { ...user, session: session._id },
-    { expiresIn: 'accessTokenTtl' } // 15 minutes
+    { expiresIn: process.env.ACCESS_TOKEN_TTL }
   );
 
   return accessToken;
