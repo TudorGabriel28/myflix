@@ -4,7 +4,7 @@ import UserService from '../services/user';
 
 const userService = new UserService();
 
-export async function createUserHandler(req: Request, res: Response) {
+export default async function createUserHandler(req: Request, res: Response) {
   try {
     const user = await userService.createUser(req.body);
     return res.send(omit(user.toJSON(), 'password'));
@@ -12,8 +12,4 @@ export async function createUserHandler(req: Request, res: Response) {
     console.log(error);
     return res.status(409).send(error.message);
   }
-}
-
-export async function loginUserHandler() {
-  console.log('ad');
 }

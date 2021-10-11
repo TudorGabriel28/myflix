@@ -1,20 +1,17 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-/* let saltRounds: number;
+require('dotenv').config();
+
+let saltRounds: number;
+
+console.log(process.env.SALT_ROUNDS);
 
 if (process.env.SALT_ROUNDS) {
   saltRounds = parseInt(process.env.SALT_ROUNDS, 10);
 } else {
   throw new Error('SALT_ROUNDS is not set');
-} */
-
-// eslint-disable-next-line no-var
-/* declare var process: {
-  env: {
-    SALT_ROUNDS: string;
-  };
-}; */
+}
 
 export interface UserDocument extends Document {
   email: string;
@@ -99,7 +96,7 @@ userSchema.pre('save', async function hashPassword(next) {
   const user = this as UserDocument;
 
   if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 10);
+    user.password = await bcrypt.hash(user.password, saltRounds);
   }
 
   next();

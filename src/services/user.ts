@@ -1,3 +1,4 @@
+import { omit } from 'lodash';
 import UserModel, { UserDocument } from '../models/user';
 
 export default class UserService {
@@ -13,5 +14,27 @@ export default class UserService {
     } catch (error: any) {
       throw new Error(error);
     }
+  }
+
+  async validatePassword({
+    email,
+    password
+  }: {
+    email: UserDocument['email'];
+    password: string;
+  }) {
+    const user = await this.userModel.findOne({ email });
+
+    if (!user) {
+      return false;
+    }
+
+    const isValid = await user.comparePassword(password);
+
+    if (!isValid) {
+      return false;
+    }
+
+    return omit(user.toJSON(), 'password');
   }
 }
