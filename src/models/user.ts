@@ -5,8 +5,6 @@ require('dotenv').config();
 
 let saltRounds: number;
 
-console.log(process.env.SALT_ROUNDS);
-
 if (process.env.SALT_ROUNDS) {
   saltRounds = parseInt(process.env.SALT_ROUNDS, 10);
 } else {
