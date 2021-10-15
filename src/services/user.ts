@@ -35,3 +35,11 @@ export async function validatePassword({
 export async function findUser(query: FilterQuery<UserDocument>) {
   return UserModel.findOne(query).lean();
 }
+
+export async function getAllUsers() {
+  try {
+    return await UserModel.find({}, { password: 0 }).lean();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
