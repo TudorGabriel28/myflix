@@ -18,6 +18,10 @@ export async function updateSession(
   return SessionModel.updateOne(query, update);
 }
 
+export async function findSessions(query: FilterQuery<SessionDocument>) {
+  return SessionModel.find(query).lean();
+}
+
 export function createAccessToken({
   user,
   session
