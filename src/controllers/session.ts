@@ -4,7 +4,8 @@ import { validatePassword } from '../services/user';
 import {
   createSession,
   createAccessToken,
-  updateSession
+  updateSession,
+  findSessions
 } from '../services/session';
 import { sign } from '../utils/jwt';
 
@@ -50,5 +51,17 @@ export async function invalidateUserSessionHandler(
     return res.sendStatus(200);
   } catch (error: any) {
     res.status(400).send(error.message);
+  }
+}
+
+export async function getUserSessionsHandler(req: Request, res: Response) {
+  try {
+    const userId = get(req, 'user._id');
+
+    const sessions = await findSessions({ user: userId, valid: true });
+
+    return res.send(sessions);
+  } catch (error: any) {
+    return res.status(400).send(error.message);
   }
 }
