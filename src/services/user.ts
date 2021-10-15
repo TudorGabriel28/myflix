@@ -1,4 +1,4 @@
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, UpdateQuery } from 'mongoose';
 import { omit } from 'lodash';
 import UserModel, { UserDocument } from '../models/user';
 
@@ -39,6 +39,19 @@ export async function findUser(query: FilterQuery<UserDocument>) {
 export async function getAllUsers() {
   try {
     return await UserModel.find({}, { password: 0 }).lean();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+export async function editUser(
+  query: FilterQuery<UserDocument>,
+  updates: UpdateQuery<UserDocument>
+) {
+  try {
+    return await UserModel.findOneAndUpdate(query, updates, {
+      new: true
+    }).lean();
   } catch (error: any) {
     throw new Error(error);
   }
