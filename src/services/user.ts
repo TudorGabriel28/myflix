@@ -74,3 +74,11 @@ export async function deleteUser(
     throw new Error(error);
   }
 }
+
+export async function getAllUsers() {
+  try {
+    return await UserModel.find({}, { password: 0 }).lean();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
