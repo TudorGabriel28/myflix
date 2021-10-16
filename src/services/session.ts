@@ -36,7 +36,7 @@ export function createAccessToken({
   // Build and return the new access token
   const accessToken = sign(
     // eslint-disable-next-line no-underscore-dangle
-    { ...user, session: session._id },
+    { ...user, sessionId: session._id },
     { expiresIn: process.env.ACCESS_TOKEN_TTL }
   );
 
