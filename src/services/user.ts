@@ -1,6 +1,8 @@
 import { FilterQuery, UpdateQuery } from 'mongoose';
 import { omit } from 'lodash';
 import UserModel, { UserDocument } from '../models/user';
+import { updateSession } from './session';
+import { SessionDocument } from '../models/session';
 
 export async function createUser(input: UserDocument) {
   try {
@@ -56,6 +58,18 @@ export async function editUser(
     return await UserModel.findOneAndUpdate(query, updates, {
       new: true
     }).lean();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+export async function deleteUser(
+  query: FilterQuery<UserDocument>,
+  sessionId: FilterQuery<SessionDocument>
+) {
+  try {
+    await UserModel.deleteOne({ query });
+    await updateSession({ _id: sessionId }, { valid: false });
   } catch (error: any) {
     throw new Error(error);
   }
