@@ -74,3 +74,15 @@ export async function deleteUser(
     throw new Error(error);
   }
 }
+
+export async function activateAccount(userId: string) {
+  try {
+    return await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { valid: true },
+      { new: true }
+    ).lean();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

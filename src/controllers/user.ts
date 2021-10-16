@@ -5,7 +5,8 @@ import {
   getAllUsers,
   findUser,
   editUser,
-  deleteUser
+  deleteUser,
+  activateAccount
 } from '../services/user';
 import { sendAccountActivationMail } from '../services/mailer';
 
@@ -65,6 +66,16 @@ export async function deleteUserHandler(req: Request, res: Response) {
     // @ts-ignore
     await deleteUser(_id, sessionId);
     return res.sendStatus(200);
+  } catch (error: any) {
+    return res.status(400).send(error.message);
+  }
+}
+
+export async function activateAccountHandler(req: Request, res: Response) {
+  try {
+    const { userId } = req.params;
+    const user = await activateAccount(userId);
+    return res.status(201).send(omit(user, ['password']));
   } catch (error: any) {
     return res.status(400).send(error.message);
   }

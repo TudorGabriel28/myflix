@@ -4,7 +4,8 @@ import {
   getAllUsersHandler,
   getUserHandler,
   editUserHandler,
-  deleteUserHandler
+  deleteUserHandler,
+  activateAccountHandler
 } from '../controllers/user';
 
 const userRouter = Router();
@@ -23,5 +24,8 @@ userRouter.delete('/', deleteUserHandler);
 
 // Get user profile
 userRouter.get('/:userId', getUserHandler);
+
+// Activate account
+userRouter.get('/activate/:userId', activateAccountHandler);
 
 export default userRouter;

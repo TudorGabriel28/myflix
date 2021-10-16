@@ -1,5 +1,7 @@
-import { UserDocument } from '../models/user'
-import mailer from '../utils/mailer'
+import { UserDocument } from '../models/user';
+import mailer from '../utils/mailer';
+
+require('dotenv').config();
 
 export async function sendAccountActivationMail(user: UserDocument) {
   const mailContent = {
@@ -7,13 +9,16 @@ export async function sendAccountActivationMail(user: UserDocument) {
     to: user.email,
     subject: 'Account activation',
     // eslint-disable-next-line no-underscore-dangle
-    text: `http://localhost:3000/users/activation/${user._id}`
+    text: `http://localhost:3000/api/users/activate/${user._id}`
   };
 
   await mailer(mailContent);
 }
 
-export async function sendResetPasswordMail(user: UserDocument, tokenId: string) {
+export async function sendResetPasswordMail(
+  user: UserDocument,
+  tokenId: string
+) {
   const mailContent = {
     from: process.env.MAILER_USER,
     to: user.email,
