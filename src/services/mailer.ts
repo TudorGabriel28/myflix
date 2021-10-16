@@ -1,3 +1,5 @@
+import { LeanDocument } from 'mongoose';
+import { ResetPasswordTokenDocument } from '../models/reset.password.token';
 import { UserDocument } from '../models/user';
 import mailer from '../utils/mailer';
 
@@ -16,8 +18,8 @@ export async function sendAccountActivationMail(user: UserDocument) {
 }
 
 export async function sendResetPasswordMail(
-  user: UserDocument,
-  tokenId: string
+  user: UserDocument | LeanDocument<UserDocument>,
+  tokenId: ResetPasswordTokenDocument['_id']
 ) {
   const mailContent = {
     from: process.env.MAILER_USER,
