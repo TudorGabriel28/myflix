@@ -59,8 +59,7 @@ export async function reIssueAccessToken({
   // Make sure the session is still valid
   if (!session || !session?.valid) return false;
 
-  const user = await findUser({ _id: session.user });
-
+  const user = await findUser({ _id: session.user }, { password: 0 });
   if (!user) return false;
 
   const accessToken = createAccessToken({ user, session });
