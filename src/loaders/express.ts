@@ -3,6 +3,7 @@ import userRouter from '../routes/user';
 import sessionRouter from '../routes/session';
 import movieRouter from '../routes/movie';
 import deserializeUser from '../middlewares/deserializeUser';
+import resetPasswordTokenRouter from '../routes/reset.password.token';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/users', userRouter);
 app.use('/api/sessions', sessionRouter);
 app.use('/api/movies', movieRouter);
+app.use('/api/reset-password', resetPasswordTokenRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
