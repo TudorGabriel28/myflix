@@ -86,3 +86,21 @@ export async function activateAccount(userId: string) {
     throw new Error(error);
   }
 }
+
+export async function updatePassword(
+  query: FilterQuery<UserDocument>,
+  password: UserDocument['password']
+) {
+  try {
+    const user = await UserModel.findOne(query);
+    if (!user) {
+      throw new Error("User doesn't exist anymore.");
+    }
+    user.password = password;
+    await user.save();
+    // eslint-disable-next-line no-underscore-dangle
+    // need to return a lean object
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

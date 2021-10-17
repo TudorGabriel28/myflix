@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
-import createResetPasswordToken from '../services/reset.password.token';
+import {
+  createResetPasswordToken,
+  deleteResetPasswordToken
+} from '../services/reset.password.token';
 import { sendResetPasswordMail } from '../services/mailer';
-import { findUser } from '../services/user';
+import { findUser, updatePassword } from '../services/user';
 
-export default async function createResetPasswordTokenHandler(
+export async function createResetPasswordTokenHandler(
   req: Request,
   res: Response
 ) {
@@ -14,7 +17,6 @@ export default async function createResetPasswordTokenHandler(
     if (!user) {
       return res.status(400).send('User not found.');
     }
-
     // eslint-disable-next-line no-underscore-dangle
     const resetPasswordToken = await createResetPasswordToken(user._id);
     // eslint-disable-next-line no-underscore-dangle
@@ -22,6 +24,29 @@ export default async function createResetPasswordTokenHandler(
 
     return res.sendStatus(201);
   } catch (error: any) {
-    res.status(400).send(error.message);
+    return res.status(400).send(error.message);
+  }
+}
+
+export async function updatePasswordHandler(req: Request, res: Response) {
+  try {
+    const { tokenId } = req.params;
+    const { password, passwordConfirmation } = req.body;
+    if (password !== passwordConfirmation) {
+      return res.status(400).send('Passwords are not the same.');
+    }
+
+    // Delete reset password token
+    const token = await deleteResetPasswordToken({ _id: tokenId });
+    if (!token) {
+      return res.status(400).send('Link has expired.');
+    }
+
+    // Update password
+    await updatePassword({ _id: token.userId }, password);
+
+    return res.sendStatus(200);
+  } catch (error: any) {
+    return res.status(400).send(error.message);
   }
 }
