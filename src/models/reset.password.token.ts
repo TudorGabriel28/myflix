@@ -7,7 +7,7 @@ export interface ResetPasswordTokenDocument extends mongoose.Document {
 }
 
 const resetPasswordTokenSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true },
   expireAt: {
     type: Date,
     default: Date.now,
