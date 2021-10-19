@@ -7,6 +7,7 @@ import {
   deleteUserHandler,
   activateAccountHandler
 } from '../controllers/user';
+import requiresUser from '../middlewares/requiresUser';
 
 const userRouter = Router();
 
@@ -17,7 +18,7 @@ userRouter.post('/', createUserHandler);
 userRouter.get('/', getAllUsersHandler);
 
 // Edit your profile
-userRouter.put('/', editUserHandler);
+userRouter.put('/', requiresUser(['viewer']), editUserHandler);
 
 // Delete user
 userRouter.delete('/', deleteUserHandler);
