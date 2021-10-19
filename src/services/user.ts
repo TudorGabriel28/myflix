@@ -42,9 +42,36 @@ export async function findUser(
   return UserModel.findOne(query, projection, options).lean();
 }
 
-export async function getAllUsers() {
+export async function getAllUsers(
+  filters: string,
+  sort: string,
+  sortOrder: string | number,
+  limit: number,
+  skip: number,
+  search?: string
+) {
   try {
-    return await UserModel.find({}, { password: 0 }).lean();
+    const searchCriteria = {};
+
+    if (search) {
+      // @ts-ignore
+      searchCriteria.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { author: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const filtersObj = JSON.parse(filters);
+
+    return await UserModel.find(
+      { ...searchCriteria, ...filtersObj },
+      { password: 0 }
+    )
+      .sort({ [sort]: sortOrder })
+      .limit(limit)
+      .skip(skip)
+      .lean()
+      .exec();
   } catch (error: any) {
     throw new Error(error);
   }
