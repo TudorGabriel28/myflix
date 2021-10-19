@@ -6,3 +6,5 @@ export type ReqQuery = {
   skip: number;
   search?: string;
 };
+
+export type UserRole = 'viewer' | 'admin' | 'superuser';
