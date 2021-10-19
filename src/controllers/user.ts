@@ -1,5 +1,6 @@
-import { omit } from 'lodash'
+import { omit } from 'lodash';
 import { Request, Response } from 'express';
+import { ReqQuery } from '../utils/types';
 import {
   createUser,
   getAllUsers,
@@ -20,9 +21,20 @@ export async function createUserHandler(req: Request, res: Response) {
   }
 }
 
-export async function getAllUsersHandler(req: Request, res: Response) {
+export async function getAllUsersHandler(
+  req: Request<any, any, any, ReqQuery>,
+  res: Response
+) {
   try {
-    const users = await getAllUsers();
+    const { filters, sort, sortOrder, limit, skip, search } = req.query;
+    const users = await getAllUsers(
+      filters,
+      sort,
+      sortOrder,
+      limit,
+      skip,
+      search
+    );
     if (!users) {
       return res.sendStatus(404);
     }
