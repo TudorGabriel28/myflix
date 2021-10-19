@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { createMovie, getMovies } from '../services/movie';
+import { ReqQuery } from '../utils/types';
 
 export async function createMovieHandler(req: Request, res: Response) {
   try {
@@ -9,15 +10,6 @@ export async function createMovieHandler(req: Request, res: Response) {
     return res.status(400).send(error.message);
   }
 }
-
-type ReqQuery = {
-  filters: string;
-  sort: string;
-  sortOrder: string | number;
-  limit: number;
-  skip: number;
-  search?: string;
-};
 
 export async function getMoviesHandler(
   req: Request<any, any, any, ReqQuery>,
