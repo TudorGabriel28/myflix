@@ -1,15 +1,15 @@
 # Myflix - Your personal database for movies and TV shows
-Myflix is a web application which offers users the possiblity to keep track of their watched movies from all platforms, review, rate and recommend them. The platform is meant to be also a social space, where the user can communicate with their friends and get new movie ideas from his/her friends watched movies and reviews.
+Myflix is a web application which offers users the possiblity to keep track of their watched movies from all platforms, review, rate and recommend them. The platform is also meant to be a social space, where the user can communicate with their friends and get new movies ideas from his friends' watched movies and reviews.
 
 # Technology
   
   The web application API is a NodeJS Restful CRUD API built with express framework and typescript, as for the database it was used MongoDb.
   
-  The frontend will be based on VueJs framework together with bootstrap 5.
+  The frontend will be based on VueJs framework together with Bootstrap 5.
 
 # Interface and functionalities
 
-There are two types of users: viewer and admin. The viewer account is all the customer functionalities of the web application, while the admin has additional capabilities for management of the database. These include the following:
+There are two types of users: viewer and admin. The viewer account contains all the customer functionalities of the web application, while the admin has additional capabilities for management of the database. These include the following:
   * Revisal of newly added movies (accept, reject or modify the movie)
   * Capability to remove a user
   * Capability to remove a movie
@@ -19,28 +19,28 @@ There are two types of users: viewer and admin. The viewer account is all the cu
 
 ## Login
 
-After you registered and confirmed your email adress, you can login into your account.
+After you registered and confirmed your email address, you can login into your account.
 
 ![Login Page](https://user-images.githubusercontent.com/61846679/148546055-1562595c-f101-45e3-aeff-ef9f9f818c8a.png)
 
 ## Main page
  
- Here you can see all the movies added by you in your lists. You can search for any movie in the database, and if it doen't exist you can add it through "Add Movie" page
+ Here you can see all the movies added by you in your lists. You can search for any movie in the database, and if it doesn't exist you can add it through "Add Movie" page
  
  ![Home page](https://user-images.githubusercontent.com/61846679/148546694-61e2b537-85e9-4e42-857f-6dcc4e94ea8b.png)
  
 ## Add a movie
- There are twp options for creating a new movie in database: 
+ There are two options for creating a new movie in database: 
   
   **Manual mode** - that requires to introduce all the data about the movie by hand. The sent data will not be available for all users until an admin revise the movie request.
   
-  **Using the IMDb API** - you need to paste the exact movie title from IMDb and the information about the movie will be fetched. This operation will not need a revisal from an admin as the information is certainly correct.
+  **Using the IMDb API** - you need to paste the exact movie title from IMDb and the information about the movie will be fetched. This operation will not need a revision from an admin as the information is certainly correct.
   
 ![Add movie page](https://user-images.githubusercontent.com/61846679/148548138-b5650ce0-1e3d-47dd-abd3-6027b96c866c.png)
 
 ## Friends
 
-The secondary purpose of this web app, besides keeping an archive with all of your seen movies, is to also be a social community. In this sense, you can be friends with other users and see their favourites movies.
+The secondary purpose of this web app, besides keeping an archive with all of your seen movies, is to also be a community. In this sense, you can be friends with other users and see their favourites movies.
 
 ![Friends page](https://user-images.githubusercontent.com/61846679/148549658-ca91f256-0ca0-4854-ace9-a45c2bcb654c.png)
 
