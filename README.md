@@ -58,18 +58,13 @@ On this page admins will be able to accept, reject or modify user's movie reques
 
 ![Requests page](https://user-images.githubusercontent.com/61846679/148550033-c0dbc119-7d8a-4c3e-929a-144dfacf053f.png)
 
-# What I realised until now
+# What are the next steps
 
-For now, just the backend part was created with the basic functionalities like:
-
-Authentification,
-
-Account activation,
-
-Activation,
-
-CRUD operations on user, movies, sessions routes
-
+On the backend, all the basic functionality was implemented and the following tasks will be completed in the near future:
+- [ ] IMDb API connection for adding a movie
+- [ ] Friends functionality
+- [ ] Movie requests functionality
+- [ ] Jest testing
 
 
 
