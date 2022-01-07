@@ -106,7 +106,7 @@ export async function activateAccount(userId: string) {
   try {
     return await UserModel.findOneAndUpdate(
       { _id: userId },
-      { valid: true },
+      { active: true },
       { new: true }
     ).lean();
   } catch (error: any) {
